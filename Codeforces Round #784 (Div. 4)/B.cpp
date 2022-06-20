@@ -1,27 +1,27 @@
-#include <iostream>
-#include <map>
+#include <bits/stdc++.h>
 using namespace std;
+#define all(v) v.begin(), v.end()
+#define fastio ios_base::sync_with_stdio(0), cin.tie(0)
+#define endl '\n'
 
 int main(void) {
-  int t, n, tmp, no;
-  map<int, int> ans;
+  fastio;
+  int t;
   cin >> t;
-  for(int i = 0; i < t; i++) {
+  while(t--) {
+    int n;
     cin >> n;
-    no = 1;
-    ans.clear();
-    for(int j = 0; j < n; j++) {
-      cin >> tmp;
-      ans[tmp]++;
-    }
-    for (auto iter = ans.begin(); iter != ans.end(); ++iter) {
-      if(iter->second > 2) {
-          cout << iter->first << '\n';
-          no = 0;
-          break; 
+    vector<int> v(n);
+    for(auto& x : v) cin >> x;
+    sort(all(v));
+    int flag = 1;
+    for(int i = 0, cnt = 1; i < n - 1; ++i) {
+      if(v[i] == v[i + 1]) {
+        ++cnt;
+        if(cnt == 3) {cout << v[i] << endl; flag = 0; break;}
       }
+      else cnt = 0;
     }
-    if(no == 1) cout << -1 << '\n';
+    if(flag) cout << -1 << endl;
   }
-  return 0;
 }
